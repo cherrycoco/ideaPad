@@ -43,7 +43,7 @@ export default function App() {
         {/* <Route path="/notes" component={FeaturePage} /> */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </AppWrapper>
   );
 }
