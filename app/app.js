@@ -67,16 +67,16 @@ const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 // const render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      {/* <LanguageProvider messages={messages}> */}
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      {/* </LanguageProvider> */}
-    </Provider>,
-    MOUNT_NODE
-  );
+ReactDOM.render(
+  <Provider store={store}>
+    {/* <LanguageProvider messages={messages}> */}
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+    {/* </LanguageProvider> */}
+  </Provider>,
+  MOUNT_NODE
+);
 // };
 
 // if (module.hot) {

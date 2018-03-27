@@ -2,15 +2,14 @@
  * Create the store with dynamic reducers
  */
 
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore } from 'redux';
 import ideaApp from './reducers';
 
 const addLoggingToDispatch = (store) => {
-  const rawDispatch = store.dispatch; 
+  const rawDispatch = store.dispatch;
   if (!console.group) {
     return rawDispatch;
   }
-  
   return (action) => {
     console.group(action.type);
     console.log('%c prev state', 'color: gray', store.getState());
@@ -23,7 +22,7 @@ const addLoggingToDispatch = (store) => {
 };
 
 const configureStore = () => {
-  const store = createStore(ideaApp, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());  
+  const store = createStore(ideaApp, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
   if (process.env.NODE_ENV !== 'production') {
     store.dispatch = addLoggingToDispatch(store);
   }
@@ -36,8 +35,6 @@ export default configureStore;
 // import { fromJS } from 'immutable';
 // import { routerMiddleware } from 'react-router-redux';
 // import createSagaMiddleware from 'redux-saga';
-
-
 
 // const sagaMiddleware = createSagaMiddleware();
 

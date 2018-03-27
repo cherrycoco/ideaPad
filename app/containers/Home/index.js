@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addIdea } from './actions'; 
+import { addIdea } from './actions';
 import Form from './Form';
 import CenteredSection from './CenteredSection';
 import Button from './Button';
@@ -29,7 +29,6 @@ let Home = ({ dispatch }) => {
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(addIdea(input.value));
-                console.log('input', input.value);
                 input.value = null;
               }}
             >ADD TO IDEA BANK</Button>
@@ -42,28 +41,4 @@ let Home = ({ dispatch }) => {
 
 Home = connect()(Home);
 
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import { addTodo } from '../actions/index';
-
-// let AddTodo = ({ dispatch }) => {
-//   let input;
-
-//   return (
-//     <div>
-//       <form>
-//         <input ref={node => {input = node}} />
-//         <button onClick={ e => {
-//           e.preventDefault();
-//           dispatch(addTodo(input.value));
-//           input.value = null;
-//         }}>Add</button>
-//       </form>
-//     </div>
-//   )
-// }
-
-// AddTodo = connect()(AddTodo);
-
-// export default AddTodo; 
 export default Home;
