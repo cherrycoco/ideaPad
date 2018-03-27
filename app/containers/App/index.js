@@ -16,7 +16,6 @@ import Home from 'containers/Home/index';
 // import FeaturePage from 'containers/FeaturePage/Loadable';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 const AppWrapper = styled.div`
   max-width: calc(768px + 16px * 2);
@@ -31,10 +30,10 @@ export default function App() {
   return (
     <AppWrapper>
       <Helmet
-        titleTemplate="%s - Cherry's note app"
-        defaultTitle="Cherry's note app"
+        titleTemplate="%s - Cherry's Micro-Note"
+        defaultTitle="Cherry's Micro-Note"
       >
-        <meta name="description" content="Cherry's note app" />
+        <meta name="description" content="Cherry's Micro-Note" />
       </Helmet>
       <Header />
       <Switch>
@@ -43,7 +42,6 @@ export default function App() {
         {/* <Route path="/notes" component={FeaturePage} /> */}
         {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
-      <Footer />
     </AppWrapper>
   );
 }

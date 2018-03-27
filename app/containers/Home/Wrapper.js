@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  padding: 2px;
+  border-bottom: 1px solid #eee;
+  height: 70vh;
+  width: 70vw;
+  margin: 3em, auto;
 `;
 
 export default Wrapper;
