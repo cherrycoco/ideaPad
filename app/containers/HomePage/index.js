@@ -51,7 +51,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       <article>
         <Helmet>
           <title>Home Page</title>
-          <meta name="description" content="A React.js Boilerplate application homepage" />
+          <meta name="description" content="Cherry's notepad" />
         </Helmet>
         <div>
           <CenteredSection>
