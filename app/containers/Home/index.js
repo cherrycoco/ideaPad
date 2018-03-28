@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { addIdea } from './actions';
 import Form from './Form';
 import CenteredSection from './CenteredSection';
 import Button from './Button';
 import Textarea from './Textarea';
 import H2 from '../../components/H2/index';
-import GetIdeas from '../../containers/GetIdeas/index';
 import Input from './Input';
 
 let Home = ({ dispatch }) => {
@@ -44,9 +44,12 @@ let Home = ({ dispatch }) => {
           </CenteredSection>
         </label>
       </Form>
-      {/* <GetIdeas /> */}
     </div>
   );
+};
+
+Home.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 };
 
 Home = connect()(Home);

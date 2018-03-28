@@ -1,19 +1,3 @@
-// import React from 'react';
-
-
-// const Ideas = ({ ideas }) => (
-//   <ul>
-//     {ideas.map((idea) =>
-//       (<Idea
-//         key={idea.id}
-//         {...idea}
-//       />)
-//     )}
-//   </ul>
-// );
-
-// export default Ideas;
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -26,7 +10,7 @@ const styles = () => ({
   },
 });
 
-function SimpleExpansionPanel({ classes, ideas }) {
+function Ideas({ classes, ideas }) {
   return (
     <CenteredSection className={classes.root}>
       {ideas.map((idea) =>
@@ -36,8 +20,9 @@ function SimpleExpansionPanel({ classes, ideas }) {
   );
 }
 
-SimpleExpansionPanel.propTypes = {
+Ideas.propTypes = {
   classes: PropTypes.object.isRequired,
+  ideas: PropTypes.array.isRequired,
 };
 
-export default withStyles(styles)(SimpleExpansionPanel);
+export default withStyles(styles)(Ideas);

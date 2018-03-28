@@ -1,11 +1,3 @@
-// import React from 'react';
-
-// const Idea = ({ text }) => (
-//   <li>{text}</li>
-// );
-
-// export default Idea;
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -19,7 +11,7 @@ import ExpandIcon from './ExpandIcon';
 
 const styles = () => ({
   root: {
-    width: '70vw',
+    width: '80vw',
   },
 });
 
@@ -33,6 +25,11 @@ const Idea = ({ classes, idea }) => (
     </ExpansionPanelDetails>
   </ExpansionPanel>
 );
+
+Idea.propTypes = {
+  classes: PropTypes.object.isRequired,
+  idea: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(Idea);
 
