@@ -3,6 +3,7 @@ const idea = (state = {}, action) => {
     case 'ADD_IDEA':
       return {
         id: action.id,
+        subject: action.subject,
         text: action.text,
       };
     default:

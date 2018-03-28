@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-const Textarea = styled.textarea`
+const Input = styled.input`
   outline: none;
   border: 1px solid #00b7b33b;
   border-radius: 10px;
   background-color: #FDFFFC;
   font-family: 'Indie Flower', cursive;
-  padding: 20px;
+  margin-bottom: 20px;
+  width: 350px;
+  height: 40px;
+  padding: 15px;
   color: #607d8b;
 `;
 
-export default Textarea;
+export default Input;

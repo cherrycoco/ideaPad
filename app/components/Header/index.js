@@ -13,7 +13,7 @@ const Header = () => (
     </FloatLeft>
     <NavBar>
       <HeaderLink to="/">Home</HeaderLink>
-      <HeaderLink to="/notes">Notes</HeaderLink>
+      <HeaderLink to="/ideas">Notes</HeaderLink>
     </NavBar>
     <br />
   </Wrapper>

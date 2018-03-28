@@ -9,7 +9,7 @@ export default styled(Link)`
   cursor: pointer;
   font-family: Raleway, sans-serif;
   font-size: 16px;
-  color: #939596;
+  color: #22D9C5;
 
   &:active {
     text-decoration: underline;

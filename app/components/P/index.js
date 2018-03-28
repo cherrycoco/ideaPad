@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const H2 = styled.h2`
-  font-size: 1.2em;
+const P = styled.p`
+  font-size: 1em;
   font-family: Raleway, sans-serif;
   font-weight: 100;
   color: #607d8b;
-  text-align: center;
+  font-family: 'Indie Flower', cursive;
 `;
 
-export default H2;
+export default P;

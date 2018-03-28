@@ -1,9 +1,10 @@
-import React from 'react';
+import styled from 'styled-components';
 
-function H3(props) {
-  return (
-    <h3 {...props} />
-  );
-}
+const H3 = styled.h3`
+  font-size: 1.1em;
+  font-family: Raleway, sans-serif;
+  font-weight: 100;
+  color: #00B7B3;
+`;
 
 export default H3;
