@@ -39,9 +39,7 @@ export default function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Home} />
-        {/* <Route exact path="/" component={HomePage} /> */}
         <Route path="/ideas" component={GetIdeas} />
-        {/* <Route path="" component={NotFoundPage} /> */}
       </Switch>
     </AppWrapper>
   );

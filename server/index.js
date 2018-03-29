@@ -2,6 +2,7 @@
 
 const express = require('express');
 const logger = require('./logger');
+const bodyParser = require('body-parser')
 
 const argv = require('./argv');
 const port = require('./port');
@@ -9,10 +10,17 @@ const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
+const controllers = require('./controllers');
 const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+app.use(bodyParser.json());
+
+app.get('/api/ideas', controllers.ideas.get);
+
+app.post('/api/ideas', controllers.ideas.post);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
