@@ -9,7 +9,7 @@ import Wrapper from './Wrapper';
 const Header = () => (
   <Wrapper>
     <FloatLeft>
-      <H1>IdeaPad</H1>
+      <H1 primary>IdeaPad</H1>
     </FloatLeft>
     <NavBar>
       <HeaderLink to="/">Home</HeaderLink>
