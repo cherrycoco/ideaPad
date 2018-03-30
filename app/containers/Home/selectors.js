@@ -1,17 +1,39 @@
 /**
- * Home selectors
+ * The global state selectors
  */
 
 import { createSelector } from 'reselect';
 
 const selectHome = (state) => state.get('home');
 
-const makeSelectUsername = () => createSelector(
+// select currentIdea from home
+const makeSelectCurrentIdea = () => createSelector(
   selectHome,
-  (homeState) => homeState.get('username')
+  (homeState) => homeState.get('currentIdea')
+);
+
+// select loading from home
+const makeSelectLoading = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('loading')
+);
+
+// select error from home
+const makeSelectError = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('error')
+);
+
+// select success from home
+const makeSelectSuccess = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('success')
 );
 
 export {
   selectHome,
-  makeSelectUsername,
+  makeSelectCurrentIdea,
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectSuccess,
 };

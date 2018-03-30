@@ -1,40 +1,49 @@
-import { combineReducers } from "redux";
+/*
+ * AppReducer
+ *
+ * The reducer takes care of our data. Using actions, we can change our
+ * application state.
+ * To add a new action, add it to the switch statement in the reducer function
+ *
+ * Example:
+ * case YOUR_ACTION_CONSTANT:
+ *   return state.set('yourStateVariable', true);
+ */
 
-const idea = (state = {}, action) => {
-  switch (action.type) {
-    case 'ADD_IDEA':
-      return {
-        id: action.id,
-        subject: action.subject,
-        text: action.text,
-      };
-    default:
-      return state;
-  }
-};
+import { fromJS } from 'immutable';
 
-const byId = (state = {}, action) => {
-  switch (action.type) {
-    case 'ADD_IDEA':
-      return {...state, 
-        [action.id]: idea(state[action.id], action)};
-    default:
-      return state;
-  }
-};
-
-const list = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_IDEA':
-      return [...state, action.id];
-    default:
-      return state;
-  }
-};
-
-const ideas = combineReducers({
-  byId,
-  list,
+// The initial state of the App
+const initialState = fromJS({
+  loading: false,
+  error: false,
+  success: false,
+  currentIdea: {},
 });
 
-export default ideas;
+function homeReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'ADD_IDEA':
+      return state
+        .set('currentIdea', {
+          id: action.id,
+          subject: action.subject,
+          text: action.text,
+        })
+        .set('loading', true)
+        .set('error', false)
+        .set('success', false);
+    case 'ADD_IDEA_SUCCESS':
+      return state
+        .set('loading', false)
+        .set('succcess', true);
+    case 'ADD_IDEA_ERROR':
+      return state
+        .set('error', action.error)
+        .set('loading', false)
+        .set('currentIdea', {});
+    default:
+      return state;
+  }
+}
+
+export default homeReducer;
