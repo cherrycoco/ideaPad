@@ -12,6 +12,7 @@ import ExpandIcon from './ExpandIcon';
 const styles = () => ({
   root: {
     width: '80vw',
+    maxWidth: '600px',
   },
 });
 
