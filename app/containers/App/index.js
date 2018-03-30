@@ -12,9 +12,6 @@ import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from 'containers/Home/index';
-// import HomePage from 'containers/HomePage/Loadable';
-// import FeaturePage from 'containers/FeaturePage/Loadable';
-// import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import GetIdeas from 'containers/GetIdeas/index';
 
@@ -31,10 +28,10 @@ export default function App() {
   return (
     <AppWrapper>
       <Helmet
-        titleTemplate="%s - Cherry's Micro-Note"
-        defaultTitle="Cherry's Micro-Note"
+        titleTemplate="%s - IdeaPad"
+        defaultTitle="IdeaPad"
       >
-        <meta name="description" content="Cherry's Micro-Note" />
+        <meta name="description" content="IdeaPad" />
       </Helmet>
       <Header />
       <Switch>
