@@ -9,8 +9,10 @@ db.once('open', () => console.log('we are connected'));
 
 // define the schema
 const ideaSchema = mongoose.Schema({
+  id: String,
   subject: String,
   text: String,
+  date: { type: Date, default: Date.now },
 });
 
 // define the model
@@ -25,9 +27,10 @@ module.exports = {
     return newIdea.save();
   },
 
-  // get all ideas from database
+  // get all ideas from database, sort it in descending order by time stamp
   getAll: () => (
     Idea.find()
+    .sort('-date')
   ),
 };
 

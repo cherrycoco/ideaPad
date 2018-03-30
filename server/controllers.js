@@ -1,4 +1,5 @@
 const { insertOne, getAll } = require('../database/index');
+const _ = require('lodash');
 
 module.exports = {
   ideas: {
@@ -6,11 +7,16 @@ module.exports = {
     get: (req, res) => {
       getAll()
       .then((ideas) => {
-        res.send(ideas);
+        const unescapedIdeas = ideas.map((idea) => (
+          {
+            id: idea.id,
+            subject: _.unescape(idea.subject).toUpperCase(),
+            text: _.unescape(idea.text),
+          }
+        ));
+        res.send(unescapedIdeas);
       })
-      .catch((err) => {
-        console.log('error from get ideas', err);
-      });
+      .catch((err) => res.send(err));
     },
 
     // post the idea and respond with the result of the post if success
@@ -19,9 +25,7 @@ module.exports = {
       .then((result) => {
         res.send(result);
       })
-      .catch((err) => {
-        console.log('error from post idea', err);
-      });
+      .catch((err) => res.send(err));
     },
   },
 };

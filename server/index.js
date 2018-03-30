@@ -2,7 +2,7 @@
 
 const express = require('express');
 const logger = require('./logger');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const argv = require('./argv');
 const port = require('./port');
