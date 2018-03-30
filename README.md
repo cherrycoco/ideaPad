@@ -3,7 +3,7 @@
 
 Click on this GIF to watch a full demo!
 
-<a href="https://youtu.be/7NRu1DlmVVw"><img src="https://imgflip.com/gif/27f6ar" title="IdeaPad Demo" width="70%" border="10"/></a>
+<a href="https://youtu.be/7NRu1DlmVVw"><img src="https://i.imgflip.com/27f6ar.gif" title="IdeaPad Demo" width="70%" border="10"/></a>
 
 ## TechStack
 
