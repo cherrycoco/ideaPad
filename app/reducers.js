@@ -2,54 +2,47 @@
  * Combine all reducers in this file and export the combined reducers.
  */
 
-// import { fromJS } from 'immutable';
-import { combineReducers } from 'redux';
-// import { LOCATION_CHANGE } from 'react-router-redux';
-import ideas from './containers/Home/reducer';
+import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 
-const ideaApp = combineReducers({ ideas });
+import homeReducer from 'containers/Home/reducer';
 
-export default ideaApp;
+/*
+ * routeReducer
+ *
+ * The reducer merges route location changes into our immutable state.
+ * The change is necessitated by moving to react-router-redux@5
+ *
+ */
 
-// import globalReducer from 'containers/App/reducer';
-// import languageProviderReducer from 'containers/LanguageProvider/reducer';
+// Initial routing state
+const routeInitialState = fromJS({
+  location: null,
+});
 
-// /*
-//  * routeReducer
-//  *
-//  * The reducer merges route location changes into our immutable state.
-//  * The change is necessitated by moving to react-router-redux@5
-//  *
-//  */
+/**
+ * Merge route into the global application state
+ */
+function routeReducer(state = routeInitialState, action) {
+  switch (action.type) {
+    /* istanbul ignore next */
+    case LOCATION_CHANGE:
+      return state.merge({
+        location: action.payload,
+      });
+    default:
+      return state;
+  }
+}
 
-// // Initial routing state
-// const routeInitialState = fromJS({
-//   location: null,
-// });
-
-// /**
-//  * Merge route into the global application state
-//  */
-// function routeReducer(state = routeInitialState, action) {
-//   switch (action.type) {
-//     /* istanbul ignore next */
-//     case LOCATION_CHANGE:
-//       return state.merge({
-//         location: action.payload,
-//       });
-//     default:
-//       return state;
-//   }
-// }
-
-// /**
-//  * Creates the main reducer with the dynamically injected ones
-//  */
-// export default function createReducer(injectedReducers) {
-//   return combineReducers({
-//     route: routeReducer,
-//     global: globalReducer,
-//     language: languageProviderReducer,
-//     ...injectedReducers,
-//   });
-// }
+/**
+ * Creates the main reducer with the dynamically injected ones
+ */
+export default function createReducer(injectedReducers) {
+  return combineReducers({
+    route: routeReducer,
+    home: homeReducer,
+    ...injectedReducers,
+  });
+}

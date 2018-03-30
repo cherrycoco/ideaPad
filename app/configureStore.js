@@ -2,65 +2,12 @@
  * Create the store with dynamic reducers
  */
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
-import axios from 'axios';
-import ideaApp from './reducers';
-import mySaga from './containers/Home/sagas';
-
-const addLoggingToDispatch = (store) => {
-  const rawDispatch = store.dispatch;
-  if (!console.group) {
-    return rawDispatch;
-  }
-  return (action) => {
-    console.group(action.type);
-    console.log('%c prev state', 'color: gray', store.getState());
-    console.log('%c action', 'color: blue', action.type);
-    const returnValue = rawDispatch(action);
-    console.log('%c next state', 'color: green', store.getState());
-    console.groupEnd(action.type);
-    return returnValue;
-  };
-};
-
-// const sagaMiddleware = createSagaMiddleware();
-
-function* helloSaga() {
-  console.log('Hello Sagas!');
-}
-
-// const configureStore = (initialState = {}) => {
-//   const store = createStore(ideaApp, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(sagaMiddleware));
-//   if (process.env.NODE_ENV !== 'production') {
-//     store.dispatch = addLoggingToDispatch(store);
-//   }
-
-//   sagaMiddleware.run(helloSaga);
-//   return store;
-// };
-
-// const getAllIdeas = () => {
-//   axios.get('/api/ideas')
-//   .then((res) => console.log(res));
-// };
-
-// const configureStore = () => {
-//   const store = createStore(ideaApp, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-  // if (process.env.NODE_ENV !== 'production') {
-  //   store.dispatch = addLoggingToDispatch(store);
-  // }
-
-//   return store;
-// };
-
-
-// export default configureStore;
-
-// import { fromJS } from 'immutable';
-
-// import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger';
+import { fromJS } from 'immutable';
+import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -68,9 +15,11 @@ export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
+  // 3. logger: console.log the state changes
   const middlewares = [
     sagaMiddleware,
     routerMiddleware(history),
+    logger,
   ];
 
   const enhancers = [
@@ -92,16 +41,11 @@ export default function configureStore(initialState = {}, history) {
   /* eslint-enable */
 
   const store = createStore(
-    ideaApp,
-    initialState,
+    createReducer(),
+    fromJS(initialState),
     composeEnhancers(...enhancers)
   );
 
-  if (process.env.NODE_ENV !== 'production') {
-    store.dispatch = addLoggingToDispatch(store);
-  }
-
-  sagaMiddleware.run(helloSaga);
   // Extensions
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
@@ -111,7 +55,7 @@ export default function configureStore(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(ideaApp);
+      store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
 
