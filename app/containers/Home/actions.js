@@ -1,6 +1,41 @@
 import { v4 } from 'node-uuid';
 
 /**
+ * Change the text/subject, this action starts the request saga
+ *
+ * @return {object} An action object with a type of ADD_IDEA
+ */
+export function updateSubject(subject) {
+  return {
+    type: 'UPDATE_SUBJECT',
+    subject,
+  };
+}
+
+/**
+ * Change the text/subject, this action starts the request saga
+ *
+ * @return {object} An action object with a type of ADD_IDEA
+ */
+export function resetForm() {
+  return {
+    type: 'RESET_FORM',
+  };
+}
+
+/**
+ * Change the text, this action starts the request saga
+ *
+ * @return {object} An action object with a type of ADD_IDEA
+ */
+export function updateText(text) {
+  return {
+    type: 'UPDATE_TEXT',
+    text,
+  };
+}
+
+/**
  * Add the idea, this action starts the request saga
  *
  * @return {object} An action object with a type of ADD_IDEA

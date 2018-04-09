@@ -5,7 +5,7 @@
 
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import { ideaAdded, ideaAddingError } from './actions';
+import { ideaAdded, ideaAddingError, resetForm } from './actions';
 import { makeSelectCurrentIdea } from './selectors';
 
 /**
@@ -22,6 +22,7 @@ function* callPostIdea() {
   try {
     yield call(postIdea, currentIdea);
     yield put(ideaAdded());
+    yield put(resetForm());
   } catch (err) {
     yield put(ideaAddingError(err));
   }

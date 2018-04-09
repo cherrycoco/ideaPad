@@ -12,6 +12,18 @@ const makeSelectCurrentIdea = () => createSelector(
   (homeState) => homeState.get('currentIdea')
 );
 
+// select currentIdea from home
+const makeSelectSubject = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('subject')
+);
+
+// select currentIdea from home
+const makeSelectText= () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('text')
+);
+
 // select loading from home
 const makeSelectLoading = () => createSelector(
   selectHome,
@@ -36,4 +48,6 @@ export {
   makeSelectLoading,
   makeSelectError,
   makeSelectSuccess,
+  makeSelectSubject,
+  makeSelectText,
 };

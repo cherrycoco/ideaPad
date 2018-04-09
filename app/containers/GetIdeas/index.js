@@ -12,7 +12,6 @@ import { loadIdeas } from './actions';
 // map the states to props by calling the selector functions
 const mapStateToProps = createStructuredSelector({
   ideas: makeSelectIdeas(),
-  success: makeSelectSuccess(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });

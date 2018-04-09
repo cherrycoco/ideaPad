@@ -5,8 +5,8 @@ import injectSaga from 'utils/injectSaga';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
-import { addIdea } from './actions';
-import { makeSelectCurrentIdea, makeSelectSuccess, makeSelectLoading, makeSelectError } from './selectors';
+import { addIdea, updateSubject, updateText } from './actions';
+import { makeSelectSubject, makeSelectText, makeSelectError } from './selectors';
 import Form from './Form';
 import CenteredSection from './CenteredSection';
 import Button from './Button';
@@ -15,9 +15,7 @@ import H2 from '../../components/H2/index';
 import Input from './Input';
 import saga from './saga';
 
-const Home = ({ error, dispatch }) => {
-  let text;
-  let subject;
+const Home = ({ subject, text, error, dispatch }) => {
 
   const errorRender = () => (
     <H2>{"Oops, that's embarrassing...we might have a bug somewhere!"}</H2>
@@ -32,7 +30,11 @@ const Home = ({ error, dispatch }) => {
           <CenteredSection>
             <Input
               placeholder="Subject"
-              innerRef={(node) => { subject = node; }}
+              id="subject"
+              value={subject}
+              onChange={(e) => {
+                dispatch(updateSubject(e.target.value));
+              }}
             >
             </Input>
             <Textarea
@@ -40,17 +42,18 @@ const Home = ({ error, dispatch }) => {
               cols="45"
               id="note"
               type="text"
+              value={text}
               placeholder="simply jot down your idea here..."
-              innerRef={(node) => { text = node; }}
+              onChange={(e) => {
+                dispatch(updateText(e.target.value));
+              }}
             />
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                const escapedText = _.escape(text.value);
-                const escapedSubject = _.escape(subject.value);
+                const escapedText = _.escape(text);
+                const escapedSubject = _.escape(subject);
                 dispatch(addIdea(escapedText, escapedSubject));
-                text.value = null;
-                subject.value = null;
               }}
             >ADD TO IDEA BANK</Button>
             { error ? errorRender() : <div /> }
@@ -63,15 +66,19 @@ const Home = ({ error, dispatch }) => {
 
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
+  subject: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 // map state to props by calling selector functions
 const mapStateToProps = createStructuredSelector({
-  idea: makeSelectCurrentIdea(),
-  success: makeSelectSuccess(),
-  loading: makeSelectLoading(),
   error: makeSelectError(),
+  subject: makeSelectSubject(),
+  text: makeSelectText(),
 });
 
 // map dispatch function to props

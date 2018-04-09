@@ -18,10 +18,23 @@ const initialState = fromJS({
   error: false,
   success: false,
   currentIdea: {},
+  subject: '',
+  text: '',
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
+    case 'UPDATE_SUBJECT':
+      return state
+        .set('subject', action.subject);
+    case 'UPDATE_TEXT':
+      return state
+        .set('text', action.text);
+    case 'RESET_FORM':
+      return state
+        .set('subject', '')
+        .set('text', '')
+        .set('sucess', false);
     case 'ADD_IDEA':
       return state
         .set('currentIdea', {
@@ -35,7 +48,7 @@ function homeReducer(state = initialState, action) {
     case 'ADD_IDEA_SUCCESS':
       return state
         .set('loading', false)
-        .set('succcess', true);
+        .set('success', true);
     case 'ADD_IDEA_ERROR':
       return state
         .set('error', action.error)
